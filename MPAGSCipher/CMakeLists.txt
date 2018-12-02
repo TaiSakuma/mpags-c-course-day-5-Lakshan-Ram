@@ -7,8 +7,13 @@ add_library(MPAGSCipher STATIC
   CipherType.hpp
   CaesarCipher.hpp
   CaesarCipher.cpp
+  Cipher.hpp
+  CipherFactory.hpp
+  CipherFactory.cpp
   PlayfairCipher.hpp
   PlayfairCipher.cpp
+  VigenereCipher.hpp
+  VigenereCipher.cpp
   ProcessCommandLine.hpp
   ProcessCommandLine.cpp
   TransformChar.hpp

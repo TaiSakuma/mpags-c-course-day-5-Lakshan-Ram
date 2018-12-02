@@ -11,6 +11,9 @@
 #include "ProcessCommandLine.hpp"
 #include "CaesarCipher.hpp"
 #include "PlayfairCipher.hpp"
+#include "VigenereCipher.hpp"
+#include "Cipher.hpp"
+#include "CipherFactory.hpp"
   
 // Main function of the mpags-cipher program
 int main(int argc, char* argv[])
@@ -49,7 +52,7 @@ int main(int argc, char* argv[])
       << "                      Stdout will be used if not supplied\n\n"
       << "  -c|--cipher CIPHER\n"
       << "                      Specify the cipher to be used to perform the encryption/decryption\n"
-      << "                      CIPHER can either be caesar or playfair - caesar is the default\n\n"
+      << "                      CIPHER can either be caesar or playfair or vignere - caesar is the default\n\n"
       << "  -k|--key KEY\n"
       << "                      Specify the cipher KEY\n"
       << "                      A null key, i.e. no encryption, is used if not supplied\n\n"
@@ -100,8 +103,11 @@ int main(int argc, char* argv[])
     }
   }
 
-  std::string outputText {""};
+  auto cipher = cipherFactory(settings.cipherType, settings.cipherKey);
+  std::string outputText {cipher->applyCipher(inputText, settings.cipherMode)};
 
+  
+  /*
   switch ( settings.cipherType ) {
     case CipherType::Caesar :
       {
@@ -116,7 +122,16 @@ int main(int argc, char* argv[])
 	outputText = cipher.applyCipher( inputText, settings.cipherMode );
 	break;
       }
+  case CipherType::Vigenere :
+    {
+      VigenereCipher cipher { settings.cipherKey };
+      outputText = cipher.applyCipher( inputText, settings.cipherMode );
+      break;
+    }
+      
+
   }
+  */
 
   // Output the transliterated text
   if (!settings.outputFile.empty()) {

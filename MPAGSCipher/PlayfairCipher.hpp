@@ -7,6 +7,7 @@
 
 // Our project headers
 #include "CipherMode.hpp"
+#include "Cipher.hpp"
 
 /**
  * \file PlayfairCipher.hpp
@@ -17,7 +18,7 @@
  * \class PlayfairCipher
  * \brief Encrypt or decrypt text using the Playfair cipher with the given key
  */
-class PlayfairCipher {
+class PlayfairCipher: public Cipher {
   public:
     /**
      * Create a new PlayfairCipher with the given key
@@ -32,7 +33,7 @@ class PlayfairCipher {
      * \param key the key to use in the cipher
      */
     void setKey( const std::string& key );
-
+  
     /**
      * Apply the cipher to the provided text
      *
@@ -40,7 +41,7 @@ class PlayfairCipher {
      * \param cipherMode whether to encrypt or decrypt the input text
      * \return the result of applying the cipher to the input text
      */
-    std::string applyCipher( const std::string& inputText, const CipherMode cipherMode ) const;
+    virtual std::string applyCipher( const std::string& inputText, const CipherMode cipherMode ) const override;
 
   private:
     /// The grid dimension
